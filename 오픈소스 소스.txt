@@ -1,0 +1,95 @@
+백 그라운드 이미지 넣는법
+class MPanel extends JPanel {
+Image BGImage;
+ 
+public void setBGImage() {
+BGImage = Toolkit.getDefaultToolkit().getImage("bg1.jpg");// 이미지 명
+}
+public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(BGImage, 0, 0, this.getSize().width - 1,
+                    this.getSize().height - 1, this);
+    }
+}
+
+
+프로그램 창 만드는 프로그램
+
+클래스를 두개만든 뒤에
+하나의 메인클래스에는
+package test_1;
+
+public class test_1_1 {
+
+	public static final int SCREEN_WIDTH = 1280;
+	public static final int SCREEN_HEIGHT = 720;
+	public static void main(String[] args) {
+		new test_1_1_1();
+
+	}
+
+}
+
+이것을 적어주고
+그 다음 클래스에는
+package test_1;
+
+import javax.swing.JFrame;
+
+public class test_1_1_1 extends JFrame{
+	
+	public test_1_1_1() {
+		setTitle("test");
+		setSize(test_1_1.SCREEN_WIDTH, test_1_1.SCREEN_HEIGHT);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+
+}
+
+이것을 적어준다.
+
+
+
+
+백그라운드에 배경화면 넣는법
+package test_2;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
+public class test_1_1_1 extends JFrame{
+	
+	private Image screenImage;
+	private Graphics screenGraphics;
+	
+	private Image introBackground;
+	private Graphics screenGraphic;
+	public test_1_1_1() {
+		setTitle("test");
+		setSize(test_1_1.SCREEN_WIDTH, test_1_1.SCREEN_HEIGHT);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		
+		introBackground = new ImageIcon(test_1_1.class.getResource("../images/aaa.jpg")).getImage();
+		
+	}
+	public void paint(Graphics g) {
+		screenImage = createImage(test_1_1.SCREEN_WIDTH, test_1_1.SCREEN_HEIGHT);
+		screenGraphic = screenImage.getGraphics();
+		screenDraw(screenGraphic);
+		g.drawImage(screenImage, 0, 0, null);
+	}
+	public void screenDraw(Graphics g) {
+		g.drawImage(introBackground, 0, 0, null);
+		this.repaint();
+	} 
+
+}
